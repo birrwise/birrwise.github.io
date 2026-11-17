@@ -1,0 +1,84 @@
+<!doctype html>
+<!--
+  BirrWise one-tap activation. Telegram buttons can only open https links, so the licence bot
+  opens this page with the key after "#", and the page hands it to the app:
+      https://<you>.github.io/<repo>/activate/#BW1.xxxxx
+  Browsers never send the part after "#" to the server, so the key stays between Telegram, the
+  browser and the app. Host it anywhere static (GitHub Pages from the /docs folder works) and put
+  the address in the seller settings file as "activate_url".
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Activate BirrWise Pro</title>
+<style>
+  :root { --bg: #f6f7f4; --card: #ffffff; --ink: #18211b; --muted: #5b665e; --accent: #1f7a4d; --line: #dfe4de; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #121613; --card: #1b211d; --ink: #e8ede9; --muted: #a3ada6; --accent: #4fc18a; --line: #2c342e; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px; background: var(--bg); color: var(--ink);
+         font: 16px/1.5 system-ui, -apple-system, "Noto Sans Ethiopic", "Segoe UI", sans-serif; }
+  main { width: 100%; max-width: 420px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  h1 { font-size: 1.3rem; margin: 0 0 4px; }
+  p { margin: 0 0 16px; color: var(--muted); }
+  .btn { display: block; width: 100%; padding: 14px; border-radius: 12px; border: 0; font: inherit; font-weight: 600; text-align: center;
+         text-decoration: none; cursor: pointer; margin-bottom: 10px; }
+  .primary { background: var(--accent); color: #fff; }
+  .secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  ol { padding-left: 20px; color: var(--muted); margin: 8px 0 0; }
+  .am { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 16px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <div id="ok">
+    <h1>Activate BirrWise Pro</h1>
+    <p>Opening BirrWise… If nothing happens, tap the button.</p>
+    <a id="open" class="btn primary" href="#">Open BirrWise and activate</a>
+    <button id="copy" class="btn secondary" type="button">Copy key instead</button>
+    <ol>
+      <li>If you copied the key: open BirrWise → More → BirrWise Pro.</li>
+      <li>Paste the key and tap Activate.</li>
+    </ol>
+    <div class="am">
+      <h1>ብርዋይዝ ፕሮን ያግብሩ</h1>
+      <p>ብርዋይዝ በመክፈት ላይ… ምንም ካልተከሰተ ከላይ ያለውን አዝራር ይንኩ። ወይም የፈቃድ ቁልፉን ቀድተው በብርዋይዝ → ተጨማሪ → ብርዋይዝ ፕሮ ውስጥ ይለጥፉ።</p>
+    </div>
+  </div>
+  <div id="bad" class="hidden">
+    <h1>No key found</h1>
+    <p>Open this page from the button in the BirrWise bot on Telegram.</p>
+    <p>ይህን ገጽ በቴሌግራም ካለው የብርዋይዝ ቦት አዝራር ይክፈቱ።</p>
+  </div>
+</main>
+<script>
+  (function () {
+    var key = decodeURIComponent((location.hash || "").replace(/^#/, "").replace(/^key=/, "")).trim();
+    // Clear the key from the address bar and history once read.
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    if (!/^BW1\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(key)) {
+      document.getElementById("ok").className = "hidden";
+      document.getElementById("bad").className = "";
+      return;
+    }
+    var link = "birrwise://activate?key=" + encodeURIComponent(key);
+    var open = document.getElementById("open");
+    open.href = link;
+    var copy = document.getElementById("copy");
+    copy.addEventListener("click", function () {
+      var done = function () { copy.textContent = "Copied ✓"; };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(key).then(done, function () { window.prompt("Copy the key:", key); });
+      } else {
+        window.prompt("Copy the key:", key);
+      }
+    });
+    // Try once automatically; the button stays as a fallback.
+    setTimeout(function () { location.href = link; }, 300);
+  })();
+</script>
+</body>
+</html>

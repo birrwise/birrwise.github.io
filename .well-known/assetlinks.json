@@ -1,0 +1,18 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.birrwise",
+      "sha256_cert_fingerprints": ["30:C9:5C:BC:0C:32:72:6B:2F:F5:22:D1:3A:83:EC:26:1A:56:03:A2:37:7A:41:D9:8E:19:19:33:F7:AC:4A:CA"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.birrwise.debug",
+      "sha256_cert_fingerprints": ["30:C9:5C:BC:0C:32:72:6B:2F:F5:22:D1:3A:83:EC:26:1A:56:03:A2:37:7A:41:D9:8E:19:19:33:F7:AC:4A:CA"]
+    }
+  }
+]
