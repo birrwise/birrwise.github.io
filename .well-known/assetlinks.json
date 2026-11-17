@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.birrwise",
-      "sha256_cert_fingerprints": ["30:C9:5C:BC:0C:32:72:6B:2F:F5:22:D1:3A:83:EC:26:1A:56:03:A2:37:7A:41:D9:8E:19:19:33:F7:AC:4A:CA"]
+      "sha256_cert_fingerprints": ["EC:4D:D5:1E:13:CF:25:A2:D0:47:9C:82:D8:7F:A2:D9:8E:E3:8B:8B:D6:37:46:DF:9E:04:4A:BD:FC:2F:3D:5B", "30:C9:5C:BC:0C:32:72:6B:2F:F5:22:D1:3A:83:EC:26:1A:56:03:A2:37:7A:41:D9:8E:19:19:33:F7:AC:4A:CA"]
     }
   },
   {
